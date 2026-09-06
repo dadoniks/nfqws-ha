@@ -1,6 +1,6 @@
 # NFQWS HA - Home Assistant Integration
 
-🌐 **Itegration for managing NFQWS service on Keenetic/OpenWRT routers via SSH.**
+🌐 **Integration for managing NFQWS service on Keenetic/OpenWRT routers via SSH.**
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2023.9%2B-blue.svg)](https://www.home-assistant.io)
@@ -31,14 +31,14 @@
 1. Open **HACS** in Home Assistant
 2. Click on **"Integrations"**
 3. Click **"+"** and select **"Custom repositories"**
-4. Add this repository URL: `https://github.com/IdadonI/nfqws-ha`
+4. Add this repository URL: https://github.com/dadoniks/nfqws-ha
 5. Install **"NFQWS HA"** integration
 6. Restart Home Assistant
 
 ### Manual Installation
 
 1. Download this repository
-2. Copy the `custom_components/nfqws` folder to your Home Assistant `custom_components` directory
+2. Copy the custom_components/nfqws folder to your Home Assistant custom_components directory
 3. Restart Home Assistant
 4. Add integration via **Settings → Devices & Services → Add Integration → "NFQWS HA"**
 
