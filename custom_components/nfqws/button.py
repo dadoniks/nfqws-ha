@@ -6,6 +6,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN, CONF_STATUS_MONITORING
 from .coordinator import NFQWSDataUpdateCoordinator
@@ -17,19 +18,19 @@ async def async_setup_entry(
 ) -> None:
     """Set up the button platform."""
     coordinator: NFQWSDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
-    
+
     async_add_entities([
         NFQWSStartButton(coordinator, entry),
         NFQWSStopButton(coordinator, entry),
         NFQWSRestartButton(coordinator, entry)
     ])
 
-class NFQWSButtonBase(ButtonEntity):
+class NFQWSButtonBase(CoordinatorEntity[NFQWSDataUpdateCoordinator], ButtonEntity):
     """Base class for NFQWS buttons."""
 
     def __init__(self, coordinator: NFQWSDataUpdateCoordinator, entry: ConfigEntry) -> None:
         """Initialize the button."""
-        self.coordinator = coordinator
+        super().__init__(coordinator)
         self._entry = entry
         self._attr_has_entity_name = True
 
@@ -44,11 +45,6 @@ class NFQWSButtonBase(ButtonEntity):
             model=self.coordinator.data.get("model", "Router"),
             configuration_url=f"http://{self._entry.data['host']}:{web_port}/",
         )
-
-    @property
-    def available(self) -> bool:
-        """Return True if entity is available."""
-        return True
 
 class NFQWSStartButton(NFQWSButtonBase):
     """Representation of a NFQWS Start Button."""
